@@ -12,17 +12,10 @@
 int Luz = 0;
 int buttonState = 0;             // the current reading from the input pin
 bool ConfigurationPortalRequired = false;
-unsigned long lastDebounceTime = 0;  // the last time the output pin was toggled
-unsigned long debounceDelay = 50; 
 //BOTON
 GFButton boton = GFButton(2);
 WiFiManager wifiManager;
 int estado = LOW;         // the current state of the output pin
-
-int wifi_reset = 0;
-
-//****
-
 
 Espalexa alexita;
 EspalexaDevice* LuzE;
@@ -91,7 +84,6 @@ void boton_presionado_largo(GFButton & button) {
   if (boton.getHoldTime()> 4999) {
     Serial.println("Reseteando ");
     wifiManager.resetSettings();
-    delay(500);
     if(!wifiManager.autoConnect()){
         Serial.println("Fallo en la conexión (timeout)");
         ESP.reset();
